@@ -1,0 +1,21 @@
+<xf:title>{{ $isIgnoringSignature ? phrase('liamw_ignoresignatures_stop_ignoring_signature_of_x', {'name': $user.username}) : phrase('liamw_ignoresignatures_ignore_signature_of_x', {'name': $user.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
+
+<xf:form action="{{ link('members/ignore-signature', $user) }}" ajax="true" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:inforow rowtype="confirm">
+                <xf:if is="$isIgnoringSignature">
+                    {{ phrase('liamw_ignoresignatures_please_confirm_that_you_wish_to_stop_ignoring_signature_of:') }}
+                    <xf:else />
+                    {{ phrase('liamw_ignoresignatures_please_confirm_that_you_wish_to_start_ignoring_signature_of:') }}
+                </xf:if>
+                <strong><a href="{{ link('members', $user) }}">{$user.username}</a></strong>
+            </xf:inforow>
+        </div>
+        <xf:submitrow submit="{{ $isIgnoringSignature ? phrase('unignore') : phrase('ignore') }}" rowtype="simple" />
+    </div>
+
+    <xf:redirect />
+</xf:form>

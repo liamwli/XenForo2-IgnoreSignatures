@@ -1,0 +1,22 @@
+{
+    "public/liamw_ignoresignatures_account_ignored_signatures.html": {
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "242d2df0bd64a7d078688b00ad3c4a98"
+    },
+    "public/liamw_ignoresignatures_signature_ignore.html": {
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "f05581362f9556509fee1a26da93895a"
+    },
+    "public/liamw_ignoresignatures_signature_macro.html": {
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "b852413890a2a05b66ca339da42207b9"
+    },
+    "public/liamw_ignoresignatures_signature_macro.less": {
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "bd1be44146b5d4735eec7a0f56280fb9"
+    }
+}

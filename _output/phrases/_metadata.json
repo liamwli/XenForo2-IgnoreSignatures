@@ -1,0 +1,74 @@
+{
+    "liamw_ignoresignatures_ignore_signature.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "9d719010c4d474cff67972b4af501fa7"
+    },
+    "liamw_ignoresignatures_ignore_signature_of_x.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "837377bfce8fdaf2be3c2e9d8ebb12c4"
+    },
+    "liamw_ignoresignatures_ignored_signatures.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "5ed578c20eb479751603580e819e24c9"
+    },
+    "liamw_ignoresignatures_please_confirm_that_you_wish_to_start_ignoring_signature_of.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "07839e89e4ddc9c6afe38650f5257fae"
+    },
+    "liamw_ignoresignatures_please_confirm_that_you_wish_to_stop_ignoring_signature_of.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "e96a846eaca881ca408b7725c64bf045"
+    },
+    "liamw_ignoresignatures_signature_ignored.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "b4cb80d981ffee9f08bd74f240a663b1"
+    },
+    "liamw_ignoresignatures_signature_ignored_click_to_unignore.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "2ead2b99647ec638c4c786b0fbf12a7a"
+    },
+    "liamw_ignoresignatures_signature_unignored.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "b71d0d381cd0e7038a04b5c8e509d719"
+    },
+    "liamw_ignoresignatures_stop_ignoring_signature_of_x.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "0fb40189b6ab084e25f4abbf7e829d5b"
+    },
+    "liamw_ignoresignatures_unignore_signature.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "cdb5057b36275d8c850d17f25a2f4f6d"
+    },
+    "liamw_ignoresignatures_you_are_not_currently_ignoring_any_members_signatures.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "77663864d519b3a766c76aa0822d4a67"
+    },
+    "permission.general_ignoreSignatures.txt": {
+        "global_cache": false,
+        "version_id": 1000030,
+        "version_string": "1.0.0 Alpha 1",
+        "hash": "5a63bf6ab31da82e1d9d9355314d47f7"
+    }
+}

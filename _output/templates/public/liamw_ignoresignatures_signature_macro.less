@@ -1,0 +1,21 @@
+.message-cell--main {
+  .message-signature-ignored {
+    border-top: none;
+  }
+
+  .message-signature .ignore-link {
+    display: block;
+    padding-top: 15px;
+  }
+
+  .message-signature-ignored .ignore-link {
+    visibility: hidden;
+    padding-top: 0;
+  }
+
+  &:hover {
+    .message-signature .ignore-link {
+      visibility: visible;
+    }
+  }
+}
