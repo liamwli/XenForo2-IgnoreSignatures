@@ -10,13 +10,13 @@
         "hash": "f05581362f9556509fee1a26da93895a"
     },
     "public/liamw_ignoresignatures_signature_macro.html": {
-        "version_id": 1000030,
-        "version_string": "1.0.0 Alpha 1",
-        "hash": "b852413890a2a05b66ca339da42207b9"
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "6e465920ce4ae562917614d34542489a"
     },
     "public/liamw_ignoresignatures_signature_macro.less": {
-        "version_id": 1000030,
-        "version_string": "1.0.0 Alpha 1",
-        "hash": "bd1be44146b5d4735eec7a0f56280fb9"
+        "version_id": 1000031,
+        "version_string": "1.0.0 Beta 1",
+        "hash": "33b315bf14473fd0b8a53b09abcadc78"
     }
 }

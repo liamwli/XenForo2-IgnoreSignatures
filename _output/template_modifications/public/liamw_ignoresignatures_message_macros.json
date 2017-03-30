@@ -1,0 +1,9 @@
+{
+    "template": "message_macros",
+    "description": "",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<aside class=\"message-signature\">",
+    "replace": "$0\n<xf:macro template=\"liamw_ignoresignatures_signature_macro\" name=\"signature_ignore_link\" arg-user=\"{$user}\"/>"
+}

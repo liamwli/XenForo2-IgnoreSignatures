@@ -32,7 +32,7 @@ class Member extends XFCP_Member
 
 		$redirect = $this->getDynamicRedirect();
 
-		if ($this->isPost())
+		if ($this->isPost() || $this->responseType() == 'json')
 		{
 			$ignoreSignatureService = $this->setupIgnoreSignatureService($user);
 
@@ -50,8 +50,12 @@ class Member extends XFCP_Member
 				return $this->error($signatureIgnored->getErrors());
 			}
 
-			$reply = $this->redirect($redirect, \XF::phraseDeferred($wasIgnoring ? 'liamw_ignoresignatures_signature_unignored' : 'liamw_ignoresignatures_signature_ignored'));
-			$reply->setJsonParam('switchKey', $wasIgnoring ? 'ignore' : 'unignore');
+			$viewParams = [
+				'user' => $user
+			];
+
+			$reply = $this->view('LiamW\IgnoreSignatures:Member\SignatureIgnore', 'liamw_ignoresignatures_signature_macro', $viewParams);
+			//$reply->setJsonParam('switchKey', $wasIgnoring ? 'ignore' : 'unignore');
 
 			return $reply;
 		}

@@ -1,8 +1,19 @@
-<xf:macro name="signature" arg-user="!">
-    <xf:css src="liamw_ignoresignatures_signature_macro.less"/>
-    <xf:js src="liamw/ignoresignatures/ignoresignatures.js" min="1" addon="LiamW/IgnoreSignatures" />
+<xf:macro template="message_macros" name="signature" arg-user="{$user}" />
 
+<xf:macro name="signature" arg-user="!">
     <aside class="message-signature message-signature-ignored">
-        <span class="ignore-link"><a href="{{ link('members/ignore-signature', $user) }}" data-xf-click="switch-redirect">{{ phrase('liamw_ignoresignatures_signature_ignored_click_to_unignore') }}</a></span>
+        <xf:macro template="liamw_ignoresignatures_signature_macro" name="signature_ignore_link" arg-user="{$user}"/>
     </aside>
+</xf:macro>
+
+<xf:macro name="signature_ignore_link" arg-user="!">
+    <xf:if is="$xf.visitor.canIgnoreSignature($user)">
+        <xf:css src="liamw_ignoresignatures_signature_macro.less"/>
+
+        <xf:button href="{{ link('members/ignore-signature', $user) }}" class="ignore-button button--link"
+                   data-xf-click="inserter" data-replace=".message-signature">{{ $xf.visitor.isIgnoringSignature($user) ?
+            phrase('liamw_ignoresignatures_unignore_signature') : phrase('liamw_ignoresignatures_ignore_signature')
+            }}
+        </xf:button>
+    </xf:if>
 </xf:macro>
