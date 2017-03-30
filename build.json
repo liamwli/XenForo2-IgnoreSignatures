@@ -1,7 +1,6 @@
 {
   "additional_files": [
-    "js/liamw/ignoresignatures",
-    "README.txt"
+    "js/liamw/ignoresignatures"
   ],
   "minify": "*"
 }
