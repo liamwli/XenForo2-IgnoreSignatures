@@ -1,5 +1,11 @@
 {
     "title": "Ignore Signatures",
-    "version_string": "1.0.0 Alpha 1",
-    "version_id": 1000030
+    "version_string": "1.0.0 Beta 1",
+    "version_id": "1000031",
+    "json_hash": "",
+    "dev": "Liam Williams",
+    "description": "Allows users to ignore signatures of other users.",
+    "extra_urls": {
+        "Contribute on GitHub": "https://github.com/liamwli/XenForo2-IgnoreSignatures"
+    }
 }
