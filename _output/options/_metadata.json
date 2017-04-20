@@ -1,0 +1,11 @@
+{
+    "liamw_ignoresignatures_auto_remove.json": {
+        "hash": "02803d162431d2f2741c874c4161741d"
+    },
+    "liamw_ignoresignatures_warning_sender.json": {
+        "hash": "0a6874ed080f4427ec3c8324d09ff9bc"
+    },
+    "liamw_ignoresignatures_warning_threshold.json": {
+        "hash": "bb5184adc3ba3f202f075c26be0eb593"
+    }
+}

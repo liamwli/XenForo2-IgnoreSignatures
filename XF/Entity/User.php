@@ -22,6 +22,7 @@ class User extends XFCP_User
 		}
 
 		$ignoredSignatures = $this->Profile->ignored_signatures;
+
 		return $ignoredSignatures && isset($ignoredSignatures[$userId]);
 	}
 

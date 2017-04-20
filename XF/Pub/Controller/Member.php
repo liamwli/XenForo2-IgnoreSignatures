@@ -55,7 +55,6 @@ class Member extends XFCP_Member
 			];
 
 			$reply = $this->view('LiamW\IgnoreSignatures:Member\SignatureIgnore', 'liamw_ignoresignatures_signature_macro', $viewParams);
-			//$reply->setJsonParam('switchKey', $wasIgnoring ? 'ignore' : 'unignore');
 
 			return $reply;
 		}

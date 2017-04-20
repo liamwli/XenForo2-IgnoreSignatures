@@ -32,6 +32,8 @@ class Setup extends AbstractSetup
 		{
 			$alter->addColumn('ignored_signatures', 'text')->after('ignored')
 				->comment("Added by Ignored Signatures. Comma separated integers from xf_liamw_ignored_signatures.");
+			$alter->addColumn('signature_warning_sent', 'bool')->after('ignored_signatures')
+				->setDefault(0)->comment("Added by Ignored Signatures");
 		});
 
 		$this->db()->update('xf_user_profile', ['ignored_signatures' => 'a:0:{}']);

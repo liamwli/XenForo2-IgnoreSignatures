@@ -29,7 +29,7 @@ class IgnoreSignatures extends AbstractService
 		$userIgnored = $this->em()->create('LiamW\IgnoreSignatures:IgnoredSignatures');
 		$userIgnored->user_id = $this->ignoredBy->user_id;
 		$userIgnored->ignored_user_id = $this->ignoredUser->user_id;
-		$userIgnored->save(false); // TODO: catch duplicate error
+		$userIgnored->save(false);
 
 		return $userIgnored;
 	}

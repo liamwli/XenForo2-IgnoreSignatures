@@ -1,7 +1,7 @@
 {
     "title": "Ignore Signatures",
-    "version_string": "1.0.0 Beta 2",
-    "version_id": "1000032",
+    "version_string": "2.0.0 Beta 3",
+    "version_id": "2000033",
     "json_hash": "",
     "dev": "Liam Williams",
     "description": "Allows users to ignore signatures of other users.",

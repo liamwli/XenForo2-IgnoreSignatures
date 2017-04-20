@@ -1,0 +1,1 @@
+If this is set to a positive number, a users' signature will be automatically removed if it is ignored by this many users.
