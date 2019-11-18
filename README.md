@@ -1,15 +1,14 @@
 # Ignore Signatures
 
-XenForo 2 Add-On to allow users to ignore signatures of other users.
-
-_This is for development purposes. Releases can be downloaded from the XF Community or via the releases tab_.
+_This repo is for development purposes. Installable releases can be downloaded from the releases tab._
 
 #### Requirements
 
- - XenForo 2.0+
+ - XenForo 2.1+
+ - PHP 7.0+
  
 #### Development Installation Instructions
 
- 1. Clone the contents of this repo to the `src/addons/LiamW/IgnoreSignatures` directory
- 2. Install the addon via the command line
- 3. Import development data
+ 1. Clone this repo to `src/addons/LiamW/IgnoreSignatures`
+ 2. Install the add-on via the command line:
+    `php cmd xf-addon:install LiamW/IgnoreSignatures`
