@@ -1,4 +1,4 @@
-# Ignore Signatures
+# Hide Signatures
 
 _This repo is for development purposes. Installable releases can be downloaded from the releases tab._
 
@@ -9,6 +9,6 @@ _This repo is for development purposes. Installable releases can be downloaded f
  
 #### Development Installation Instructions
 
- 1. Clone this repo to `src/addons/LiamW/IgnoreSignatures`
+ 1. Clone this repo to `src/addons/LiamW/HideSignatures`
  2. Install the add-on via the command line:
-    `php cmd xf-addon:install LiamW/IgnoreSignatures`
+    `php cmd xf-addon:install LiamW/HideSignatures`
