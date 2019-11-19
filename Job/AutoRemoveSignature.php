@@ -1,8 +1,12 @@
 <?php
 
-namespace LiamW\IgnoreSignatures\Job;
+namespace LiamW\HideSignatures\Job;
 
+use LiamW\HideSignatures\XF\Entity\User;
+use XF;
+use XF\Entity\UserProfile;
 use XF\Job\AbstractJob;
+use XF\Service\Conversation\Creator;
 
 class AutoRemoveSignature extends AbstractJob
 {
@@ -17,56 +21,62 @@ class AutoRemoveSignature extends AbstractJob
 
 		$db = $this->app->db();
 
-		$ignoredSignatureCounts = $db->fetchPairs($db->limit("SELECT ignored_user_id, COUNT(*) FROM xf_liamw_ignored_signatures WHERE ignored_user_id > ? GROUP BY ignored_user_id ORDER BY ignored_user_id ASC", $this->data['batch']), $this->data['start']);
+		$hiddenSignatureCounts = $db->fetchPairs($db->limit("SELECT hidden_user_id, COUNT(*) FROM xf_liamw_hidesignatures_user_hidden_signature WHERE hidden_user_id > ? GROUP BY hidden_user_id ORDER BY hidden_user_id", $this->data['batch']), $this->data['start']);
 
-		if (!$ignoredSignatureCounts)
+		if (!$hiddenSignatureCounts)
 		{
 			return $this->complete();
 		}
 
-		$signatureRemoveThreshold = \XF::options()->liamw_ignoresignatures_auto_remove;
-		$warnThreshold = \XF::options()->liamw_ignoresignatures_warning_threshold;
+		$removeThreshold = XF::options()->liamw_hidesignatures_auto_remove;
+		$warnThreshold = XF::options()->liamw_hidesignatures_warning_threshold;
 
 		$done = 0;
 
-		$conversationStarter = $this->app->em()
-			->findOne('XF:User', ['username' => $this->app->options()->liamw_ignoresignatures_warning_sender]);
+		$warningConversationStarter = $this->app->em()->findOne('XF:User', ['username' => $this->app->options()->liamw_hidesignatures_warning_sender]);
 
-		foreach ($ignoredSignatureCounts AS $ignoredUserId => $count)
+		foreach ($hiddenSignatureCounts AS $hiddenUserId => $count)
 		{
 			if (microtime(true) - $startTime >= $maxRunTime)
 			{
 				break;
 			}
 
-			$this->data['start'] = $ignoredUserId;
+			$this->data['start'] = $hiddenUserId;
 
-			/** @var \LiamW\IgnoreSignatures\XF\Entity\User $ignoredUser */
-			$ignoredUser = \XF::em()->findOne('XF:User', ['user_id' => $ignoredUserId]);
+			/** @var User $hiddenUser */
+			$hiddenUser = XF::em()->findOne('XF:User', ['user_id' => $hiddenUserId]);
 
-			/** @var \XF\Entity\UserProfile $ignoredUserProfile */
-			$ignoredUserProfile = $ignoredUser->getRelationOrDefault('Profile');
+			/** @var UserProfile $hiddenUserProfile */
+			$hiddenUserProfile = $hiddenUser->getRelationOrDefault('Profile');
 
-			if ($warnThreshold && $conversationStarter && !$ignoredUserProfile->signature_warning_sent && $count >= $warnThreshold)
+			if ($warnThreshold && $count >= $warnThreshold && $warningConversationStarter && !$hiddenUserProfile->liamw_hidesignatures_signature_warning_date)
 			{
-				/** @var \XF\Service\Conversation\Creator $conversationCreator */
-				$conversationCreator = $this->app->service('XF:Conversation\Creator', $conversationStarter);
-				$conversationCreator->setContent($this->app->language($ignoredUser->language_id)
-					->phrase('liamw_ignoresignatures_warning_conversation_title', ['username' => $ignoredUser->username, 'userIgnoreCount' => $count, 'removeThreshold' => $signatureRemoveThreshold, 'warningThreshold' => $warnThreshold]), $this->app->language($ignoredUser->language_id)
-					->phrase('liamw_ignoresignatures_warning_conversation_message', ['username' => $ignoredUser->username, 'userIgnoreCount' => $count, 'removeThreshold' => $signatureRemoveThreshold, 'warningThreshold' => $warnThreshold]));
-				$conversationCreator->setLogIp(false);
-				$conversationCreator->setAutoSpamCheck(false);
-				$conversationCreator->setRecipientsTrusted($ignoredUser);
+				/** @var Creator $conversationCreator */
+				$conversationCreator = $this->app->service('XF:Conversation\Creator', $warningConversationStarter);
+				$conversationCreator->setIsAutomated();
+				$conversationCreator->setContent($this->app->language($hiddenUser->language_id)->phrase('liamw_hidesignatures_warning_conversation_title', [
+					'username' => $hiddenUser->username,
+					'userIgnoreCount' => $count,
+					'removeThreshold' => $removeThreshold,
+					'warningThreshold' => $warnThreshold
+				]), $this->app->language($hiddenUser->language_id)->phrase('liamw_hidesignatures_warning_conversation_message', [
+					'username' => $hiddenUser->username,
+					'userIgnoreCount' => $count,
+					'removeThreshold' => $removeThreshold,
+					'warningThreshold' => $warnThreshold
+				]));
+				$conversationCreator->setRecipientsTrusted($hiddenUser);
 				$conversationCreator->save();
 
-				$ignoredUserProfile->signature_warning_sent = 1;
+				$hiddenUserProfile->liamw_hidesignatures_signature_warning_date = XF::$time;
 			}
-			else if ($signatureRemoveThreshold && $count >= $signatureRemoveThreshold)
+			else if ($removeThreshold && $count >= $removeThreshold)
 			{
-				$ignoredUserProfile->signature = '';
+				$hiddenUserProfile->signature = '';
 			}
 
-			$ignoredUser->save();
+			$hiddenUser->save();
 
 			$done++;
 		}
@@ -78,7 +88,7 @@ class AutoRemoveSignature extends AbstractJob
 
 	public function getStatusMessage()
 	{
-		return \XF::phrase('liamw_ignoresignatures_processing_warnings_and_removals');
+		return \XF::phrase('liamw_hidesignatures_processing_hidden_signature_removals');
 	}
 
 	public function canCancel()

@@ -1,0 +1,1 @@
+For performance reasons, you are only able to hide {hiddenLimit} signatures.

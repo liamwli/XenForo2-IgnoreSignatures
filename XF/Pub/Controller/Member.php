@@ -1,72 +1,57 @@
 <?php
 
-namespace LiamW\IgnoreSignatures\XF\Pub\Controller;
+namespace LiamW\HideSignatures\XF\Pub\Controller;
 
+use LiamW\HideSignatures\AddOn as HideSignatures;
+use LiamW\HideSignatures\Service\User\HideSignature;
 use XF\Entity\User;
 use XF\Mvc\ParameterBag;
+use XF\Service\AbstractService;
 
 class Member extends XFCP_Member
 {
 	/**
-	 * @param User $ignoreUser
+	 * @param User $hideUser
 	 *
-	 * @return \LiamW\IgnoreSignatures\Service\User\IgnoreSignatures
+	 * @return AbstractService|HideSignature
 	 */
-	protected function setupIgnoreSignatureService(\XF\Entity\User $ignoreUser)
+	protected function setupHideSignatureService(User $hideUser)
 	{
-		return $this->service('LiamW\IgnoreSignatures:User\IgnoreSignatures', $ignoreUser);
+		return $this->service('LiamW\HideSignatures:User\HideSignature', $hideUser);
 	}
 
-	public function actionIgnoreSignature(ParameterBag $params)
+	public function actionHideSignature(ParameterBag $params)
 	{
+		$this->assertRegistrationRequired();
+
 		$user = $this->assertViewableUser($params->user_id, [], true);
-		/** @var \LiamW\IgnoreSignatures\XF\Entity\User $visitor */
-		$visitor = \XF::visitor();
 
-		$wasIgnoring = $visitor->isIgnoringSignature($user);
+		$visitor = HideSignatures::visitor();
 
-		if (!$wasIgnoring && !$visitor->canIgnoreSignature($user, $error))
+		$isHidden = $visitor->isHidingSignature($user);
+
+		if (!$isHidden && !$visitor->canHideSignature($user, $error))
 		{
 			return $this->noPermission($error);
 		}
 
-		$redirect = $this->getDynamicRedirect();
+		$ignoreSignatureService = $this->setupHideSignatureService($user);
 
-		if ($this->isPost() || $this->responseType() == 'json')
+		$signatureHidden = $isHidden ? $ignoreSignatureService->show() : $ignoreSignatureService->hide();
+		if ($signatureHidden->hasErrors())
 		{
-			$ignoreSignatureService = $this->setupIgnoreSignatureService($user);
-
-			if ($wasIgnoring)
-			{
-				$signatureIgnored = $ignoreSignatureService->unignore();
-			}
-			else
-			{
-				$signatureIgnored = $ignoreSignatureService->ignore();
-			}
-
-			if ($signatureIgnored->hasErrors())
-			{
-				return $this->error($signatureIgnored->getErrors());
-			}
-
-			$viewParams = [
-				'user' => $user
-			];
-
-			$reply = $this->view('LiamW\IgnoreSignatures:Member\SignatureIgnore', 'liamw_ignoresignatures_signature_macro', $viewParams);
-
-			return $reply;
+			return $this->error($signatureHidden->getErrors());
 		}
-		else
-		{
-			$viewParams = [
+
+		$reply = $this->redirect($this->getDynamicRedirect(), '');
+		$this->app->templater()->addDefaultParam('xf', \XF::app()->getGlobalTemplateData($reply));
+		$reply->setJsonParams([
+			'html' => $this->app->templater()->renderTemplate('public:liamw_hidesignatures_signature_macro', [
 				'user' => $user,
-				'redirect' => $redirect,
-				'isIgnoringSignature' => $wasIgnoring
-			];
+				'isHidden' => !$isHidden
+			])
+		]);
 
-			return $this->view('LiamW\IgnoreSignatures:Member\IgnoreSignature', 'liamw_ignoresignatures_signature_ignore', $viewParams);
-		}
+		return $reply;
 	}
 }

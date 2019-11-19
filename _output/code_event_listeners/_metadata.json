@@ -1,8 +1,17 @@
 {
-    "entity_structure_LiamW-IgnoreSignatures-Listener_entityStructureUserProfile.json": {
+    "entity_structure_2a1ee49a2f0fd7a2d3c1e58a24a770f3.json": {
+        "hash": "2d7fabbacb98fc7953e327c6799b4309"
+    },
+    "entity_structure_43ffc2f783b6d5dfea3b11893d2e8ff9.json": {
+        "hash": "1ce6ff006fd21627d9e0c9fb02bd8a06"
+    },
+    "entity_structure_dfdcffe4c6ddd28f1a3c4e2401ea669e.json": {
         "hash": "7dfbe9654fbf72c355b764f1c08015a8"
     },
-    "templater_macro_pre_render_LiamW-IgnoreSignatures-Listener_processSignatureMacro.json": {
+    "templater_macro_pre_render_b545ed5b40ce0a15b64d02e96c0cc4b3.json": {
         "hash": "be2aa3f0de619f7697fb9e27a6d42b90"
+    },
+    "templater_macro_pre_render_dc03184bba167b2cd1c08bfbe8ce92b8.json": {
+        "hash": "78515196ef68eb074e4ee51d30622a01"
     }
 }

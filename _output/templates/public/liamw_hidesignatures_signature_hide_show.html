@@ -1,0 +1,21 @@
+<xf:title>{{ $isHidden ? phrase('liamw_hidesignatures_show_signature_of_x', {'name': $user.username}) : phrase('liamw_hidesignatures_hide_signature_of_x', {'name': $user.username}) }}</xf:title>
+
+<xf:breadcrumb href="{{ link('members', $user) }}">{$user.username}</xf:breadcrumb>
+
+<xf:form action="{{ link('members/hide-signature', $user) }}" class="block">
+    <div class="block-container">
+        <div class="block-body">
+            <xf:inforow rowtype="confirm">
+                <xf:if is="$isHidden">
+                    {{ phrase('liamw_hidesignatures_please_confirm_that_you_wish_to_show_signature_of:') }}
+                <xf:else />
+                    {{ phrase('liamw_hidesignatures_please_confirm_that_you_wish_to_hide_signature_of:') }}
+                </xf:if>
+                <strong><a href="{{ link('members', $user) }}">{$user.username}</a></strong>
+            </xf:inforow>
+        </div>
+        <xf:submitrow submit="{{ $isHidden ? phrase('liamw_hidesignatures_show_signature') : phrase('liamw_hidesignatures_hide_signature') }}" rowtype="simple" />
+    </div>
+
+    <xf:redirect />
+</xf:form>

@@ -5,5 +5,5 @@
     "enabled": true,
     "action": "str_replace",
     "find": "<aside class=\"message-signature\">",
-    "replace": "<aside class=\"message-signature message-signature-{$user.user_id}\">\n<xf:macro template=\"liamw_ignoresignatures_signature_macro\" name=\"signature_ignore_link\" arg-user=\"{$user}\"/>"
+    "replace": "<aside class=\"message-signature message-signature-{$user.user_id}\">\n<xf:macro template=\"liamw_hidesignatures_signature_macro\" name=\"signature_hide_link\" arg-user=\"{$user}\"/>"
 }

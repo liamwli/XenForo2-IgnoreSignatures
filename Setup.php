@@ -1,6 +1,6 @@
 <?php
 
-namespace LiamW\IgnoreSignatures;
+namespace LiamW\HideSignatures;
 
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
@@ -17,41 +17,29 @@ class Setup extends AbstractSetup
 
 	public function installStep1()
 	{
-		$this->getSchemaManager()->createTable('xf_liamw_ignored_signatures', function (Create $create)
+		$this->createTable('xf_liamw_hidesignatures_user_hidden_signature', function (Create $create)
 		{
-			$create->comment("Added by Ignored Signatures.");
-			$create->addColumn('user_id', 'int')->unsigned();
-			$create->addColumn('ignored_user_id', 'varchar', 75);
-			$create->addPrimaryKey(['user_id', 'ignored_user_id']);
-		});
-	}
-
-	public function installStep2()
-	{
-		$this->getSchemaManager()->alterTable('xf_user_profile', function (Alter $alter)
-		{
-			$alter->addColumn('ignored_signatures', 'text')->after('ignored')
-				->comment("Added by Ignored Signatures. Comma separated integers from xf_liamw_ignored_signatures.");
-			$alter->addColumn('signature_warning_sent', 'bool')->after('ignored_signatures')
-				->setDefault(0)->comment("Added by Ignored Signatures");
+			$create->addColumn('user_id', 'int');
+			$create->addColumn('hidden_user_id', 'int');
+			$create->addPrimaryKey(['user_id', 'hidden_user_id']);
 		});
 
-		$this->db()->update('xf_user_profile', ['ignored_signatures' => 'a:0:{}']);
+		$this->alterTable('xf_user_profile', function (Alter $alter)
+		{
+			$alter->addColumn('liamw_hidesignatures_hidden_signatures', 'text')->after('ignored')->setDefault('[]');
+			$alter->addColumn('liamw_hidesignatures_signature_warning_date', 'int')->after('liamw_hidesignatures_hidden_signatures')->nullable();
+		});
 	}
 
 	public function uninstallStep1()
 	{
-		$sm = $this->getSchemaManager();
-
-		$sm->dropTable('xf_liamw_ignored_signatures');
-		$sm->alterTable('xf_user_profile', function (Alter $alter)
+		$this->schemaManager()->dropTable('xf_liamw_hidesignatures_user_hidden_signature');
+		$this->schemaManager()->alterTable('xf_user_profile', function (Alter $alter)
 		{
-			$alter->dropColumns('ignored_signatures');
+			$alter->dropColumns([
+				'liamw_hidesignatures_hidden_signatures',
+				'liamw_hidesignatures_signature_warning_date'
+			]);
 		});
-	}
-
-	protected function getSchemaManager()
-	{
-		return $this->db()->getSchemaManager();
 	}
 }

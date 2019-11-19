@@ -1,0 +1,24 @@
+<xf:if is="$isIgnoring === {{ true }}">
+	<xf:macro name="signature" arg-user="{$user}"/>
+<xf:else/>
+	<xf:macro template="message_macros" name="signature" arg-user="{$user}"/>
+</xf:if>
+
+<xf:macro name="signature" arg-user="!">
+	<aside class="message-signature message-signature-{$user.user_id} message-signature--hidden">
+		<xf:macro name="signature_hide_link" arg-user="{$user}"/>
+	</aside>
+</xf:macro>
+
+<xf:macro name="signature_hide_link" arg-user="!">
+	<xf:if is="$xf.visitor.canHideSignature($user)">
+		<xf:css src="liamw_hidesignatures_signature_macro.less"/>
+		<xf:js addon="LiamW/HideSignatures" src="liamw/hidesignatures/hidesignatures.js" min="1"/>
+
+		<xf:button href="{{ link('members/hide-signature', $user) }}" class="hide-button button--link"
+			data-xf-click="inserter" data-replace=".message-signature-{$user.user_id}" data-all="true">
+			{{ $xf.visitor.isHidingSignature($user) ? phrase('liamw_hidesignatures_show_signature') :
+            phrase('liamw_hidesignatures_hide_signature') }}
+		</xf:button>
+	</xf:if>
+</xf:macro>

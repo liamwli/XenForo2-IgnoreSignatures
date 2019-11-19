@@ -1,25 +1,43 @@
 <?php
 
-namespace LiamW\IgnoreSignatures;
+namespace LiamW\HideSignatures;
 
+use LiamW\HideSignatures\AddOn as HideSignatures;
 use XF\Mvc\Entity\Entity;
 
 class Listener
 {
-	public static function entityStructureUserProfile(\XF\Mvc\Entity\Manager $em, \XF\Mvc\Entity\Structure &$structure)
+	public static function userEntityStructure(\XF\Mvc\Entity\Manager $em, \XF\Mvc\Entity\Structure &$structure)
 	{
-		$structure->columns['ignored_signatures'] = ['type' => Entity::SERIALIZED_ARRAY, 'default' => [], 'changeLog' => false];
-		$structure->columns['signature_warning_sent'] = ['type' => Entity::BOOL, 'default' => 0, 'changeLog' => false];
+		$structure->relations['HiddenSignatures'] = [
+			'entity' => 'LiamW\HideSignatures:UserHiddenSignature',
+			'type' => Entity::TO_MANY,
+			'conditions' => 'user_id',
+			'key' => 'hidden_user_id'
+		];
 	}
 
-	public static function processSignatureMacro(\XF\Template\Templater $templater, &$type, &$template, array &$arguments, array &$globalVars)
+	public static function userProfileEntityStructure(\XF\Mvc\Entity\Manager $em, \XF\Mvc\Entity\Structure &$structure)
 	{
-		/** @var \LiamW\IgnoreSignatures\XF\Entity\User $visitor */
-		$visitor = \XF::visitor();
+		$structure->columns['liamw_hidesignatures_hidden_signatures'] = [
+			'type' => Entity::JSON_ARRAY,
+			'default' => [],
+			'changeLog' => false
+		];
+		$structure->columns['liamw_hidesignatures_signature_warning_date'] = [
+			'type' => Entity::UINT,
+			'nullable' => true,
+			'changeLog' => false
+		];
+	}
 
-		if ($visitor->isIgnoringSignature($arguments['user']))
+	public static function processSignatureMacro(\XF\Template\Templater $templater, &$type, &$template, &$name, array &$arguments, array &$globalVars)
+	{
+		$visitor = HideSignatures::visitor();
+
+		if ($visitor->isHidingSignature($arguments['user']))
 		{
-			$template = 'liamw_ignoresignatures_signature_macro';
+			$template = 'liamw_hidesignatures_signature_macro';
 		}
 	}
 }

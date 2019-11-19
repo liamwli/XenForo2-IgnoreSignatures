@@ -1,16 +1,16 @@
 {
-    "cron_class": "\\LiamW\\IgnoreSignatures\\Cron\\AutoRemoveSignature",
+    "cron_class": "\\LiamW\\HideSignatures\\Cron\\AutoRemoveSignature",
     "cron_method": "run",
     "run_rules": {
         "day_type": "dom",
         "dom": [
-            "-1"
+            -1
         ],
         "hours": [
-            "-1"
+            -1
         ],
         "minutes": [
-            "15"
+            15
         ]
     },
     "active": true

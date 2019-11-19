@@ -1,11 +1,11 @@
 {
-    "XF-Entity-User_LiamW-IgnoreSignatures-XF-Entity-User.json": {
-        "hash": "fe414e252373cfbefae75a8c7ef099a9"
+    "XF-Entity-User_LiamW-HideSignatures-XF-Entity-User.json": {
+        "hash": "9966443797c8cf59b5c4327f72b1c112"
     },
-    "XF-Pub-Controller-Account_LiamW-IgnoreSignatures-XF-Pub-Controller-Account.json": {
-        "hash": "0d813aeb9a5af5a0708fff202b473891"
+    "XF-Pub-Controller-Account_LiamW-HideSignatures-XF-Pub-Controller-Account.json": {
+        "hash": "aa8ec79bec7ac51875be8fa33d5e5417"
     },
-    "XF-Pub-Controller-Member_LiamW-IgnoreSignatures-XF-Pub-Controller-Member.json": {
-        "hash": "99d487b418cb7f4b68a16afb8876f1b4"
+    "XF-Pub-Controller-Member_LiamW-HideSignatures-XF-Pub-Controller-Member.json": {
+        "hash": "ea58cd18d63fd7cd55d79ef4629ce8c4"
     }
 }

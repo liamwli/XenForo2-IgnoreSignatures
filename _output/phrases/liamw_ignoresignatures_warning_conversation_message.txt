@@ -1,8 +1,0 @@
-Hi {username},
-
-Your signature has been ignored by {userIgnoreCount} users. Please be aware that your signature will be automatically removed if it is ignored by {removeThreshold} or more users.
-
-Please consider changing your signature.
-
-Thanks,
-Administration

@@ -1,10 +1,10 @@
 <?php
 
-namespace LiamW\IgnoreSignatures\XF\Entity;
+namespace LiamW\HideSignatures\XF\Entity;
 
 class User extends XFCP_User
 {
-	public function isIgnoringSignature($userId)
+	public function isHidingSignature($userId)
 	{
 		if (!$this->user_id)
 		{
@@ -21,12 +21,12 @@ class User extends XFCP_User
 			return false;
 		}
 
-		$ignoredSignatures = $this->Profile->ignored_signatures;
+		$ignoredSignatures = $this->Profile->liamw_hidesignatures_hidden_signatures;
 
 		return $ignoredSignatures && isset($ignoredSignatures[$userId]);
 	}
 
-	public function canIgnoreSignature(\XF\Entity\User $user, &$error = '')
+	public function canHideSignature(\XF\Entity\User $user, &$error = null)
 	{
 		if (!$user->user_id || !$this->user_id)
 		{
@@ -35,14 +35,14 @@ class User extends XFCP_User
 
 		if ($user->is_staff)
 		{
-			$error = \XF::phraseDeferred('liamw_ignoresignatures_staff_signatures_cannot_be_ignored');
+			$error = \XF::phraseDeferred('liamw_hidesignatures_you_cannot_hide_signature_of_staff_members');
 
 			return false;
 		}
 
 		if ($user->user_id == $this->user_id)
 		{
-			$error = \XF::phraseDeferred('liamw_ignoresignatures_you_may_not_ignore_your_own_signature');
+			$error = \XF::phraseDeferred('liamw_hidesignatures_you_cannot_hide_your_own_signature');
 
 			return false;
 		}
@@ -57,7 +57,7 @@ class User extends XFCP_User
 			return false;
 		}
 
-		if (!$this->hasPermission('general', 'ignoreSignatures'))
+		if (!$this->hasPermission('general', 'lwHideSignatures'))
 		{
 			return false;
 		}

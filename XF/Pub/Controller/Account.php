@@ -1,28 +1,27 @@
 <?php
 
-namespace LiamW\IgnoreSignatures\XF\Pub\Controller;
+namespace LiamW\HideSignatures\XF\Pub\Controller;
+
+use LiamW\HideSignatures\AddOn as HideSignatures;
 
 class Account extends XFCP_Account
 {
-	public function actionIgnoredSignatures()
+	public function actionHiddenSignatures()
 	{
-		$visitor = \XF::visitor();
-		if ($ignoredSignatures = $visitor->Profile->ignored_signatures)
+		$visitor = HideSignatures::visitor();
+		if ($hiddenSignatures = $visitor->Profile->liamw_hidesignatures_hidden_signatures)
 		{
-			$ignoringUsers = $this->finder('XF:User')
-				->where('user_id', array_keys($ignoredSignatures))
-				->order('username')
-				->fetch();
+			$hiddenSignatureUsers = $this->finder('XF:User')->where('user_id', array_keys($hiddenSignatures))->order('username')->fetch();
 		}
 		else
 		{
-			$ignoringUsers = [];
+			$hiddenSignatureUsers = [];
 		}
 
 		$viewParams = [
-			'ignoring' => $ignoringUsers
+			'hidden' => $hiddenSignatureUsers
 		];
-		$view = $this->view('LiamW\IgnoredSignatures:Account\IgnoredSignatures', 'liamw_ignoresignatures_account_ignored_signatures', $viewParams);
-		return $this->addAccountWrapperParams($view, 'ignored_signatures');
+		$view = $this->view('LiamW\HideSignatures:Account\HiddenSignatures', 'liamw_hidesignatures_account_hidden_signatures', $viewParams);
+		return $this->addAccountWrapperParams($view, 'hidden_signatures');
 	}
 }

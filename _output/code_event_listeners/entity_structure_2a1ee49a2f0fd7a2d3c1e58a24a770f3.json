@@ -1,0 +1,9 @@
+{
+    "event_id": "entity_structure",
+    "execute_order": 10,
+    "callback_class": "\\LiamW\\HideSignatures\\Listener",
+    "callback_method": "userProfileEntityStructure",
+    "active": true,
+    "hint": "XF\\Entity\\UserProfile",
+    "description": "XF\\Entity\\UserProfile"
+}

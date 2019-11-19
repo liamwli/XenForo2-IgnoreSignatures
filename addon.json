@@ -1,11 +1,25 @@
 {
-    "title": "Ignore Signatures",
-    "version_string": "2.0.0 Beta 3",
-    "version_id": "2000033",
-    "json_hash": "",
-    "dev": "Liam Williams",
-    "description": "Allows users to ignore signatures of other users.",
-    "extra_urls": {
-        "Contribute on GitHub": "https://github.com/liamwli/XenForo2-IgnoreSignatures"
-    }
+  "legacy_addon_id": "",
+  "title": "Hide Signatures",
+  "description": "Allows users to ignore signatures of other users.",
+  "version_id": 2000010,
+  "version_string": "2.0.0 Alpha",
+  "dev": "Liam Williams",
+  "dev_url": "https://lw-addons.net",
+  "faq_url": "",
+  "support_url": "",
+  "extra_urls": {
+    "Contribute on GitHub": "https://github.com/lw-addons/XenForo2-HideSignatures"
+  },
+  "require": {
+    "XF": [
+      2010070,
+      "XenForo 2.1+"
+    ],
+    "php": [
+      "7.0.0",
+      "PHP 7.0+"
+    ]
+  },
+  "icon": "logo.png"
 }

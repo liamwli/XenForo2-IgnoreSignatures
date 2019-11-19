@@ -1,9 +1,0 @@
-{
-    "event_id": "templater_macro_pre_render",
-    "execute_order": 10,
-    "callback_class": "LiamW\\IgnoreSignatures\\Listener",
-    "callback_method": "processSignatureMacro",
-    "active": true,
-    "hint": "public:message_macros:signature",
-    "description": "Take control of the signature macro."
-}

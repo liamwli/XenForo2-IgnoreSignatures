@@ -1,11 +1,11 @@
 {
-    "liamw_ignoresignatures_auto_remove.json": {
-        "hash": "02803d162431d2f2741c874c4161741d"
+    "liamw_hidesignatures_auto_remove.json": {
+        "hash": "ea7a479725fd16c8571923094857ce04"
     },
-    "liamw_ignoresignatures_warning_sender.json": {
-        "hash": "0a6874ed080f4427ec3c8324d09ff9bc"
+    "liamw_hidesignatures_warning_sender.json": {
+        "hash": "6409fc3b3d16f18ae8c9b0e9b280e99c"
     },
-    "liamw_ignoresignatures_warning_threshold.json": {
-        "hash": "bb5184adc3ba3f202f075c26be0eb593"
+    "liamw_hidesignatures_warning_threshold.json": {
+        "hash": "9c5222aeece1bc75ea479dcd4b77b980"
     }
 }
